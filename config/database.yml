@@ -1,11 +1,17 @@
 development:
   adapter: postgresql
   database: elite_concierge_development
-  username: root
-  password: 
+  username: Linden
+  password: pv185189
+  pool: 100
+  max_connections: 100
+  shared_buffers: 100
 
 production:
   adapter: postgresql
   database: elite_concierge_production
-  username: root
-  password:
+  username: Linden
+  password: pv185189
+  pool: 100
+  max_connections: 100
+  shared_buffers: 100
