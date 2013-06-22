@@ -3,13 +3,20 @@ class Api::SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
+    puts "11111111"
     resource = User.find_for_database_authentication(:email => params[:user][:email])
+    puts "22222222"
+    
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
+      puts "3333333"
+      
       sign_in(:user, resource)
       current_user.save
       resource.ensure_authentication_token!
+      puts "44444"
+      
       render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email }
       return
     end
