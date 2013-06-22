@@ -5,11 +5,10 @@ class Api::SessionsController < ApplicationController
   def create
     resource = User.find_for_database_authentication(:email => params[:user][:email])
     
-    puts resource.inspect
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
-      sign_in(:user, resource)
+      sign_in(resource)
       current_user.save
       resource.ensure_authentication_token!
       render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email }
