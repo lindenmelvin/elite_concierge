@@ -4,15 +4,16 @@ class Api::SessionsController < ApplicationController
 
   def create
     resource = User.find_by_email(params[:user][:email])
+    return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
       sign_in(:user, resource)
       current_user.save
       resource.ensure_authentication_token!
-      render :json => {:success=>true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email}
-      return
+      return render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email }
     end
 
+    invalid_login_attempt
   end
 
   def destroy
@@ -20,8 +21,7 @@ class Api::SessionsController < ApplicationController
     if resource
       resource.authentication_token = nil
       resource.save
-      render :json => { :success => true }
-      return
+      return render :json => { :success => true }
     end
 
     invalid_logout_attempt
