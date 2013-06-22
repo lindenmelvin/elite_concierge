@@ -1,4 +1,4 @@
-class Api::SessionsController < ApplicationController
+class Api::SessionsController < Devise::SessionsController
   skip_before_filter :authenticate_user!
   skip_before_filter :verify_authenticity_token
 
