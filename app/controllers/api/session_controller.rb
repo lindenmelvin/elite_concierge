@@ -3,7 +3,7 @@ class Api::SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    resource = User.find_for_database_authentication(:email => params[:user][:email])
+    resource = User.find_by_email(params[:user][:email])
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
