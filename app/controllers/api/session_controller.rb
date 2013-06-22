@@ -5,6 +5,7 @@ class Api::SessionsController < ApplicationController
   def create
     resource = User.find_for_database_authentication(:email => params[:user][:email])
     
+    puts resource.inspect
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
