@@ -8,7 +8,6 @@ class Api::SessionsController < ApplicationController
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
-      throw "stop"
       sign_in(resource)
       current_user.save
       resource.ensure_authentication_token!
