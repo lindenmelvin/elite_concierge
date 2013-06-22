@@ -3,14 +3,15 @@ class Api::SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    resource = User.find_by_email(params[:user][:email])
+    resource = User.find_for_database_authentication(:email => params[:user][:email])
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
       sign_in(:user, resource)
       current_user.save
       resource.ensure_authentication_token!
-      return render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email }
+      render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email }
+      return
     end
 
     invalid_login_attempt
@@ -21,7 +22,8 @@ class Api::SessionsController < ApplicationController
     if resource
       resource.authentication_token = nil
       resource.save
-      return render :json => { :success => true }
+      render :json => { :success => true }
+      return
     end
 
     invalid_logout_attempt
