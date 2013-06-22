@@ -4,7 +4,6 @@ class Api::SessionsController < ApplicationController
 
   def create
     resource = User.find_by_email(params[:user][:email])
-    return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user][:password])
       sign_in(:user, resource)
@@ -14,7 +13,6 @@ class Api::SessionsController < ApplicationController
       return
     end
 
-    invalid_login_attempt
   end
 
   def destroy
