@@ -5,7 +5,7 @@ class Api::SessionsController < ApplicationController
   def create
     resource = User.find_for_database_authentication(:email => params[:user][:email])
     
-    return invalid_login_attempt unless resource
+    return user_not_found unless resource
 
     if resource.valid_password?(params[:user][:password])
       sign_in(resource)
@@ -32,8 +32,12 @@ class Api::SessionsController < ApplicationController
 
   protected
   
+  def user_not_found
+    render :json => {:success => false, :message => "No User found for email provided"}, :status => 401
+  end
+  
   def invalid_login_attempt
-    render :json => {:success => false, :message => "Error with your login or password"}, :status => 401
+    render :json => {:success => false, :message => "Password provided is incorrect"}, :status => 401
   end
 
   def invalid_logout_attempt
