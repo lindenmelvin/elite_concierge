@@ -1,4 +1,4 @@
-class ServiceRequestionsController < ApplicationController
+class Api::ServiceRequestionsController < ApplicationController
   
   def create
     ServiceRequest.create!(params)
