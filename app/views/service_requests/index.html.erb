@@ -1,10 +1,8 @@
 <% @service_requests.each do |service_request| %>
-  <% user = User.find(service_request.user_id) %>
   
   <div style="border-bottom:1px solid #000;">
     <div><%= service_request.subject %></div>
     <div><%= service_request.body %></div>
-    <div><%= user.email %></div>
     <div><%= service_request.created_at %></div>
   </div>
   
