@@ -7,6 +7,8 @@ EliteConcierge::Application.routes.draw do
       post '/login' => 'sessions#create', :on => :collection
       get '/logout' => 'sessions#destroy', :on => :collection
     end
+    
+    resources :service_requests
   end
   
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }
