@@ -1,9 +1,10 @@
 <% @service_requests.each do |service_request| %>
   
   <div style="border-bottom:1px solid #000;">
-    <div><%= service_request.subject %></div>
-    <div><%= service_request.body %></div>
-    <div><%= service_request.created_at %></div>
+    <div>Submitted by: <%= service_request.user.email %></div>
+    <div>Subject: <%= service_request.subject %></div>
+    <div>Body: <%= service_request.body %></div>
+    <div>Date Submitted: <%= service_request.created_at %></div>
   </div>
   
 <% end %>
