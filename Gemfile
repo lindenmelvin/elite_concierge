@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'activeadmin'
 gem 'devise'
-gem 'jquery-rails'
+gem "jquery-rails", "2.3.0"
 gem 'pg'
 gem 'rails', '3.2.13'
 
