@@ -12,6 +12,28 @@ ActiveAdmin.register User do
     column :last_name
     column :email
     column :created_at
+    actions
+  end
+  
+  show do |user|
+    attributes_table do
+      row :id
+      row :first_name
+      row :last_name
+      row :email
+      row :created_at
+      row :updated_at
+    end
+  end
+  
+  form do |f|
+    f.inputs :basics do
+      f.input :first_name
+      f.input :last_name
+      f.input :email
+    end
+
+    f.actions
   end
   
 end
