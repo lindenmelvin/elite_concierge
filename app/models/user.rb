@@ -1,15 +1,15 @@
 class User < ActiveRecord::Base
   has_many :service_requests
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :token_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   
   before_save :ensure_authentication_token
+  
+  def to_s
+    return "#{first_name} #{last_name}"
+  end
   
 end
