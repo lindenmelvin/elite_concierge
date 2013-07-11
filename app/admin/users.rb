@@ -1,15 +1,13 @@
 ActiveAdmin.register User do
   
-  scope :all do |users|
-    users
-  end
+  scope :all
   
   scope :administrators do |users|
-    Role.administrators
+    Administrator
   end
   
   scope :residents do |users|
-    Role.residents
+    Resident
   end
   
   filter :id
@@ -24,9 +22,6 @@ ActiveAdmin.register User do
     column :last_name
     column :email
     column :created_at
-    column :roles do |user|
-      span user.roles.collect { |role| role.name }
-    end
     actions
   end
   
@@ -36,9 +31,6 @@ ActiveAdmin.register User do
       row :first_name
       row :last_name
       row :email
-      row :roles do |user|
-        span user.roles.collect { |role| role.name }
-      end
       row :created_at
       row :updated_at
     end
@@ -49,7 +41,8 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
-      f.input :roles
+      f.input :password
+      f.input :type, :as => :select, :label => "Type", :collection => Role.all.map(&:name)
     end
 
     f.actions

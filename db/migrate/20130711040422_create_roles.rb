@@ -1,5 +1,5 @@
 class CreateRoles < ActiveRecord::Migration
-  def change
+  def up
     create_table :roles do |t|
       t.string :name
       
@@ -13,5 +13,10 @@ class CreateRoles < ActiveRecord::Migration
 
     add_index :roles_users, :user_id
     add_index :roles_users, :role_id
+  end
+  
+  def down
+    drop_table :roles
+    drop_table :roles_users
   end
 end

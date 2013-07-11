@@ -1,7 +1,5 @@
 class EditServiceRequests < ActiveRecord::Migration
-  def change
-    drop_table :service_requests
-
+  def up
     create_table(:service_requests) do |t|
       t.string :subject
       t.text :body
@@ -12,5 +10,9 @@ class EditServiceRequests < ActiveRecord::Migration
     end
 
     add_index :service_requests, :user_id
+  end
+  
+  def down
+    drop_table :service_requests
   end
 end

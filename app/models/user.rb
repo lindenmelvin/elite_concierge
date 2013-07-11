@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :token_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :time_zone, :role_ids
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :time_zone, :role_ids, :type
   
   before_save :ensure_authentication_token
   
@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
     return "#{first_name} #{last_name}"
   end
   
-  def admin?
-    roles.include?(Role.find_by_name('admin'))
+  def administrator?
+    self.type == 'Administrator'
   end
   
 end

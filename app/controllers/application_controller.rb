@@ -6,4 +6,7 @@ class ApplicationController < ActionController::Base
     return '/login'
   end
   
+  def confirm_administrator
+    current_user.administrator?
+  end
 end
