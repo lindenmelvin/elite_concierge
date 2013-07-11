@@ -19,7 +19,7 @@ EliteConcierge::Application.routes.draw do
     get '/logout' => 'sessions#destroy'
   end
   
-  root :to => 'users#index'
+  root to: "admin/dashboard#index"
   ActiveAdmin.routes(self)
   
 end

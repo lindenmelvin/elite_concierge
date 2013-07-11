@@ -1,0 +1,2 @@
+class Resident < User
+end
