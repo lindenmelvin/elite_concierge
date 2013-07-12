@@ -1,7 +1,5 @@
 class EditServiceRequests < ActiveRecord::Migration
-  def up
-    drop_table :service_requests
-    
+  def up    
     create_table(:service_requests) do |t|
       t.string :subject
       t.text :body
