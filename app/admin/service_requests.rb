@@ -2,6 +2,7 @@ ActiveAdmin.register ServiceRequest do
   
   filter :id
   filter :resident
+  filter :administrator
   filter :subject
   filter :body
   filter :category
@@ -14,5 +15,14 @@ ActiveAdmin.register ServiceRequest do
     column :resident
     column :created_at
     actions
+  end
+  
+  show do |service_request|
+    attributes_table do
+      row :id
+      row :resident
+      row :administrator
+      row :created_at
+    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130711144458) do
+ActiveRecord::Schema.define(:version => 20130712020538) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -67,14 +67,13 @@ ActiveRecord::Schema.define(:version => 20130711144458) do
   create_table "service_requests", :force => true do |t|
     t.string   "subject"
     t.text     "body"
-    t.integer  "user_id"
     t.integer  "category_id"
     t.integer  "status_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "resident_id"
+    t.integer  "administrator_id"
   end
-
-  add_index "service_requests", ["user_id"], :name => "index_service_requests_on_user_id"
 
   create_table "statuses", :force => true do |t|
     t.string "name"
