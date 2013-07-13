@@ -1,0 +1,2 @@
+class ServiceRequestCategory < Category
+end
