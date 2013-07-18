@@ -2,7 +2,7 @@ class Api::ServiceRequestsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
   def create
-    params[:service_request].merge!(:resident_id => current_user.id)
+    params[:service_request].merge!(:resident_id => current_user.id, :administrator => Administrstor.first)
     if ServiceRequest.create!(params[:service_request])
       render json: { success: true }
     else
