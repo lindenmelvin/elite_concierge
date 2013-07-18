@@ -11,7 +11,7 @@ class Api::SessionsController < ApplicationController
       sign_in(resource)
       current_user.save
       resource.ensure_authentication_token!
-      render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email }
+      render :json => { :success => true, :id => resource.id, :authentication_token => resource.authentication_token, :email => resource.email, :first_name => resource.first_name, :last_name => resource.last_name }
       return
     end
 
